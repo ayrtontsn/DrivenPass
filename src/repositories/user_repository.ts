@@ -14,11 +14,9 @@ async function create_user(user:User) {
 }
 
 async function check_user(email:string) {
-    console.log(email)
     const user = await prisma.user.findFirst({
         where: {email}
     })
-    console.log(user)
     return user
 }
 
