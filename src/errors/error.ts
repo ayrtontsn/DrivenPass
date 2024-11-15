@@ -1,7 +1,7 @@
-export function email_error(){
+export function conflict_error(type: string){
     return {
             name: "CONFLICT",
-            message: `Esse email já está cadastrado!` 
+            message: `Esse ${type} já está cadastrado!` 
         }
 }
 

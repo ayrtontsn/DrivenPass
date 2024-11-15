@@ -1,12 +1,12 @@
 import { User } from "@prisma/client";
 import { user_repositoy } from "../repositories/user_repository";
-import { email_error, email_signIn, password_error } from "../errors/error";
+import { conflict_error, email_signIn, password_error } from "../errors/error";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 
 export async function post_user_service(user:User) {
     const check_user = await user_repositoy.check_user(user.email)
-    if(check_user) throw email_error()
+    if(check_user) throw conflict_error("email")
     const create_result = await user_repositoy.create_user(user)
     return create_result
 }

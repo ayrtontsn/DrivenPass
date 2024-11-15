@@ -6,6 +6,7 @@ import dotenv from "dotenv"
 import user_router from "./routers/user_router";
 import error_handling_middleware from "./middlewares/error_handler_middleware";
 import { StatusCodes } from "http-status-codes";
+import credential_router from "./routers/credential_router";
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,7 @@ app.get("/health", (req: Request, res: Response) => {
   });
 
 app.use(user_router)
+app.use(credential_router)
 
 app.use(error_handling_middleware)
 
