@@ -20,7 +20,15 @@ async function check_user(email:string) {
     return user
 }
 
+async function delete_user(email:string) {
+    const user = await prisma.user.delete({
+        where: {email}
+    })
+    return user
+}
+
 export const user_repositoy = {
     create_user,
-    check_user
+    check_user,
+    delete_user
 }
