@@ -1,5 +1,5 @@
 import { Credential, User } from "@prisma/client"
-import { conflict_error } from "../errors/error"
+import { conflict_error, error_found } from "../errors/error"
 import { credential_repository } from "../repositories/credential_repository"
 import { user_repositoy } from "../repositories/user_repository"
 import Cryptr from "cryptr"
@@ -22,4 +22,12 @@ export async function get_credential_service(user: User) {
     })
 
     return all_credential
+}
+
+export async function get_credential_id_service(user: User, id: number) {
+    
+    const all_credential = await get_credential_service(user)
+    const credential = all_credential.filter(credential => credential.id===id)
+    if(credential.length === 0) throw error_found("id")
+    return credential
 }

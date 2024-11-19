@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { StatusCodes } from "http-status-codes"
-import { get_credential_service, post_credential_service } from "../services/credential_service"
+import { get_credential_id_service, get_credential_service, post_credential_service } from "../services/credential_service"
 
 export async function post_credential_controller(req: Request, res: Response) {
     const credential = req.body
@@ -13,6 +13,14 @@ export async function post_credential_controller(req: Request, res: Response) {
 export async function get_credential_controller(req: Request, res: Response) {
     const user = res.locals.user;
     const get_credential = await get_credential_service(user)
+
+    res.status(StatusCodes.OK).send(get_credential)
+}
+
+export async function get_credential_id_controller(req: Request, res: Response) {
+    const { id } = req.params;
+    const user = res.locals.user;
+    const get_credential = await get_credential_id_service(user, Number(id))
 
     res.status(StatusCodes.OK).send(get_credential)
 }

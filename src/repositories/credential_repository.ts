@@ -26,6 +26,15 @@ async function check_credential_byTitle(title:string, user_id: number) {
     return credential
 }
 
+async function check_credential_byId(id: number) {
+    const credential = await prisma.credential.findFirst({
+        where: {
+            id
+        }
+    })
+    return credential
+}
+
 async function check_all_credential(user_id: number) {
     const credential = await prisma.credential.findMany({
         where: {
@@ -38,5 +47,6 @@ async function check_all_credential(user_id: number) {
 export const credential_repository = {
     create_credential,
     check_credential_byTitle,
-    check_all_credential
+    check_all_credential,
+    check_credential_byId
 }

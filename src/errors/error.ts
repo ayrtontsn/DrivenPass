@@ -5,10 +5,10 @@ export function conflict_error(type: string){
         }
 }
 
-export function email_signIn(){
+export function error_found(iten: string){
     return {
             name: "NOT FOUND",
-            message: "Não existe esse email cadastrado!"
+            message: `Não existe esse ${iten} cadastrado!`
         }
 }
 
