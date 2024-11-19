@@ -62,10 +62,20 @@ async function update_credential(id: number,credential: Credential) {
     return update_result
 }
 
+async function delete_credential(id: number) {
+    const delete_result = await prisma.credential.delete({
+        where:{
+            id
+        }
+    })
+    return delete_result
+}
+
 export const credential_repository = {
     create_credential,
     check_credential_byTitle,
     check_all_credential,
     check_credential_byId,
-    update_credential
+    update_credential,
+    delete_credential
 }

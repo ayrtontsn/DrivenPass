@@ -41,3 +41,11 @@ export async function update_credential_id_service(user: User, id: number, crede
 
     return result_credential
 }
+
+export async function delete_credential_id_service(user: User, id: number) {
+    
+    const check_id_credential = await get_credential_id_service(user, id)
+    const result_credential = await credential_repository.delete_credential(id)
+
+    return result_credential
+}

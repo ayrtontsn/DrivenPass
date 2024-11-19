@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { StatusCodes } from "http-status-codes"
-import { get_credential_id_service, get_credential_service, post_credential_service, update_credential_id_service } from "../services/credential_service"
+import { delete_credential_id_service, get_credential_id_service, get_credential_service, post_credential_service, update_credential_id_service } from "../services/credential_service"
 
 export async function post_credential_controller(req: Request, res: Response) {
     const credential = req.body
@@ -32,4 +32,12 @@ export async function update_credential_id_controller(req: Request, res: Respons
     const update_credential = await update_credential_id_service(user, Number(id),credential)
 
     res.status(StatusCodes.NO_CONTENT).send(update_credential)
+}
+
+export async function delete_credential_id_controller(req: Request, res: Response) {
+    const { id } = req.params;
+    const user = res.locals.user;
+    const delete_credential = await delete_credential_id_service(user, Number(id))
+
+    res.status(StatusCodes.NO_CONTENT).send(delete_credential)
 }
