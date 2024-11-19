@@ -29,5 +29,15 @@ export async function get_credential_id_service(user: User, id: number) {
     const all_credential = await get_credential_service(user)
     const credential = all_credential.filter(credential => credential.id===id)
     if(credential.length === 0) throw error_found("id")
-    return credential
+    return credential[0]
+}
+
+export async function update_credential_id_service(user: User, id: number, credential: Credential) {
+    
+    const check_id_credential = await get_credential_id_service(user, id)
+    const check_credential = await credential_repository.check_credential_byTitle(credential.title, check_id_credential.userId)
+    if(check_credential) throw conflict_error("título")
+    const result_credential = await credential_repository.update_credential(id,credential)
+
+    return result_credential
 }
